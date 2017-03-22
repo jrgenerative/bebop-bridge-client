@@ -1,0 +1,7 @@
+<p-growl [value]="msgs" life=5000></p-growl>
+
+<div id="mapid" style="width: 100%; height: 500px;"></div>
+<button (click)="triggerFlightplanEvent()">Show loaded mission</button>
+<button (click)="panToDrone()">Center vehicle</button>
+<label>Position {{(this.controlService.position | async)?.latitude | number:'1.6-6'}}, {{(this.controlService.position | async)?.longitude | number:'1.6-6'}} [deg] </label>
+<label>Altitude {{(this.controlService.position | async)?.altitude | number:'1.0-0'}} [m]</label>

@@ -1,0 +1,33 @@
+<p-growl [value]="msgs" life=5000></p-growl>
+
+<table>
+	<tr>
+		<td><button class="controlbutton" (click)="yawLeft()">yaw left (u)</button></td>
+		<td><button class="controlbutton" (click)="moveForward()">forward (i)</button></td>
+		<td><button class="controlbutton" (click)="yawRight()">yaw right (o)</button></td>
+	</tr>
+	<tr>
+		<td><button class="controlbutton" (click)="moveLeft()">left (j)</button></td>
+		<td><button class="controlbutton" (click)="stopMoving()">stop (k)</button></td>
+		<td><button class="controlbutton" (click)="moveRight()">right (l)</button></td>
+	</tr>
+	<tr>
+		<td><button class="controlbutton" (click)="moveDown()">down (m)</button></td>
+		<td><button class="controlbutton" (click)="moveBackward()">backwards (,)</button></td>
+		<td><button class="controlbutton" (click)="moveUp()">up (.)</button></td>
+	</tr>
+</table>
+<table>
+	<tr>
+		<td><button class="takeoffbutton" (click)="takeoff()">Take-off (ALT+t)</button></td>
+		<td><button class="touchdownbutton" (click)="land()">Land (ALT+c)</button></td>
+	</tr>
+</table>
+
+
+<table>
+	<tr>
+		<td colspan="2"><button class="connectbutton" (click)="connect()">Connect</button></td>
+	</tr>
+</table>
+

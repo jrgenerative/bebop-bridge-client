@@ -1,0 +1,105 @@
+<p-growl [value]="_msgs" life=5000></p-growl>
+
+<div class="dashboard-container">
+
+	<div class="dashboard-card-large">
+		<table width="100%">
+			<tr>
+				<td>
+					<p-dropdown [style]="{'width':'350px', 'margin':'0px 0px 0px 0px'}" [options]="this._flightplans" [(ngModel)]="this._selectedFlightplan"></p-dropdown>
+				</td>
+			</tr>
+		</table>
+		<table>
+			<tr>
+				<td>
+					<button class="dashboard-card-item" (click)="uploadFlightplan(this._selectedFlightplan)">Upload to Bebop</button>
+				</td>
+				<td>
+					<button class="dashboard-card-item" (click)="deleteFlightplanFromLibrary(this._selectedFlightplan)">Remove</button>
+				</td>
+				<td>
+					<input class="dashboard-card-item" type="button" value="Add..." onclick="document.getElementById('selectedFile').click();" />
+					<input class="dashboard-card-item" type="file" id="selectedFile" style="display: none;" #flightplanFileDialog (change)="addFlightplanFile(flightplanFileDialog)"
+					/>
+				</td>
+			</tr>
+		</table>
+		<table width="100%">
+			<tr>
+				<td>
+					Flight plan library
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<div class="dashboard-card-large">
+		<table width="100%">
+			<tr>
+				<td>
+					<label style="width:200px; float:left"> {{(this.controlService.flightplan | async)?.name | flightplanNameToDisplayName}} </label>
+				</td>
+			</tr>
+		</table>
+		<table width="100%">
+			<tr>
+				<td>
+					<button class="dashboard-card-item" (click)="checkFlightplan()">Check</button>
+				</td>
+				<td>
+					<button class="dashboard-card-item" (click)="deleteFlightplan()">Remove</button>
+				</td>
+			</tr>
+		</table>
+		<table width="100%">
+			<tr>
+				<td>
+					Flight plan on Bebop (at {{this._obsDistanceToTakeoff | async }}[m])
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<div class="dashboard-card-large">
+		<table width="100%">
+			<tr>
+				<td align="center" valign="middle">Calib</td>
+				<td align="center" valign="middle">GPS</td>
+				<td align="center" valign="middle">Flight plan</td>
+				<td align="center" valign="middle">Take-off</td>
+			</tr>
+			<tr>
+				<td>
+					<div class="color-box" [style.background-color]="this.controlService.calibrationForAutonomousFlightOk | async | booleanToRedGreenColor"></div>
+				</td>
+				<td>
+					<div class="color-box" [style.background-color]="this.controlService.gpsForAutonomousFlightOk | async | booleanToRedGreenColor"></div>
+				</td>
+				<td>
+					<div class="color-box" [style.background-color]="this.controlService.flightPlanForAutonomousFlightOk | async | booleanToRedGreenColor"></div>
+				</td>
+				<td>
+					<div class="color-box" [style.background-color]="this.controlService.takeOffForAutonmousFlightOk | async | booleanToRedGreenColor"></div>
+				</td>
+			</tr>
+		</table>
+		<label align="center" valign="middle">Mission readiness</label>
+	</div>
+
+	<div class="dashboard-card-large">
+		<table width="100%">
+			<tr>
+				<!--(ALT+i)-->
+				<td><button class="dashboard-card-item" style="width: 100px; height: 50px; color: white; background-color: #4CAF50" (click)="startMission()">Start/Cont. (Alt+i)</button></td>
+				<!--(ALT+k)-->
+				<td><button class="dashboard-card-item" style="width: 100px; height: 50px; color: white; background-color: #fc8a25" (click)="pauseMission()">Pause (Alt+k)</button></td>
+				<!--(ALT+,)-->
+				<td><button class="dashboard-card-item" style="width: 100px; height: 50px; color: white; background-color: #f44336" (click)="stopMission()">Stop (Alt+,)</button></td>
+			</tr>
+		</table>
+
+		<label align="center" valign="middle">Mission command</label>
+	</div>
+
+</div>

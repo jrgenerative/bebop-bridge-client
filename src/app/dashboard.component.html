@@ -1,0 +1,38 @@
+<p-growl [value]="msgs" life=5000></p-growl>
+
+<div class="dashboard-container">
+
+  <div class="dashboard-card">
+    <div class="dashboard-card-item">  {{this.controlService.connectionQuality | async}} dbm</div>
+    <p-progressBar [value]="this.controlService.connectionQuality | async | connectionQualityProgressCircleConvert"></p-progressBar>
+    <div class="dashboard-card-item"> Wifi</div>
+  </div>
+
+  <div class="dashboard-card">
+      <div class="dashboard-card-item">  {{this.controlService.batteryLevel | async}} %</div>
+      <p-progressBar [value]="this.controlService.batteryLevel | async"></p-progressBar>
+      <div class="dashboard-card-item"> Battery</div>
+  </div>
+
+  <div class="dashboard-card">
+    <div class="dashboard-card-item">  {{this.controlService.massStorageFreeSize | async }} MB</div>
+    <p-progressBar [value]="this.controlService.massStorageFreeSizePercent | async"></p-progressBar>
+    <div class="dashboard-card-item"> Disk space</div>
+  </div>
+
+  <div class="dashboard-card">
+    <div class="dashboard-card-item"> {{this.controlService.contact | async}}s</div>
+    <div class="dashboard-card-item"> <div class="color-box" [style.background-color]="this.controlService.contact | async | lastContactTimeToTrafficLightColor"></div></div>
+    <div class="dashboard-card-item"> Last contact</div>
+  </div>
+
+  <div class="dashboard-card">
+    <div class="dashboard-card-item">  {{this.controlService.gpsFixState | async}}</div>
+    <div class="dashboard-card-item"> <div class="color-box" [style.background-color]="this.controlService.gpsFixState | async | booleanToRedGreenColor"></div></div>
+    <div class="dashboard-card-item"> GPS fix</div>
+  </div>
+
+</div>
+
+
+
