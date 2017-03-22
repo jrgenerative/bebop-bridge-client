@@ -10,7 +10,7 @@ import { FlightplanService } from 'bebop-bridge-shared';
 import { FlightplanServiceRemote } from './flightplan.service.remote';
 import { Flightplan, Waypoint } from 'bebop-bridge-shared';
 import { ConnectableObservable } from 'rxjs/observable/ConnectableObservable';
-var geolib = require('geolib');
+let geolib = require('geolib');
 
 @Component({
     selector: 'drone-mission',
@@ -36,7 +36,7 @@ export class MissionComponent implements OnInit {
         // Distance to flightplan takeoff location
         this._obsDistanceToTakeoff = Observable.combineLatest(controlService.position, controlService.flightplan, (pos, flightplan: Flightplan) => {
             if (flightplan.isValid && pos.latitude && pos.longitude) {
-                let wp = new Waypoint(pos.latitude, pos.longitude, flightplan.takeOffPosition.altitude, 0, 0)
+                let wp = new Waypoint(pos.latitude, pos.longitude, flightplan.takeOffPosition.altitude, 0, 0);
                 return Math.floor(geolib.getDistance(wp, flightplan.takeOffPosition));
             }
             else {
