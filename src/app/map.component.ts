@@ -56,27 +56,29 @@ export class MapComponent implements OnInit {
         this._map = leaflet.map('mapid').setView([47.468722, 8.274975], 13);
 
 
-         // Google map imagery layer
+        // Google map imagery layer
         this._mapLayers.push({
-            name: 'Google', 
+            name: 'Google',
             value: leaflet.tileLayer(
-            'http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
-                maxZoom: 21,
-                subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
-            })});
+                'http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+                    maxZoom: 21,
+                    subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+                })
+        });
 
         // Agis map imagery layer
-        this._mapLayers.push ({
+        this._mapLayers.push({
             name: 'Agis',
             value: leaflet.tileLayer(
-            'http://mapproxy.osm.ch:8080/tiles/AGIS2014/EPSG900913/{z}/{x}/{y}.png?origin=nw', { // http://mapproxy.osm.ch/demo -> 2014
-                //private _mapSource: string = 'http://mapproxy.osm.ch:8080/tiles/AGIS2016/EPSG900913/{z}/{x}/{y}.png?origin=nw'; // http://mapproxy.osm.ch/demo -> 2016
-                maxZoom: 18,
-                attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-                '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-                'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-                id: 'mapbox.streets'
-            })});
+                'http://mapproxy.osm.ch:8080/tiles/AGIS2014/EPSG900913/{z}/{x}/{y}.png?origin=nw', { // http://mapproxy.osm.ch/demo -> 2014
+                    //private _mapSource: string = 'http://mapproxy.osm.ch:8080/tiles/AGIS2016/EPSG900913/{z}/{x}/{y}.png?origin=nw'; // http://mapproxy.osm.ch/demo -> 2016
+                    maxZoom: 18,
+                    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+                    '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+                    'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+                    id: 'mapbox.streets'
+                })
+        });
 
         // Use the first array entry as the default map
         this._mapLayers[0].value.addTo(this._map);
@@ -119,10 +121,27 @@ export class MapComponent implements OnInit {
     }
 
     private panToDrone(): void {
-        if (this._vehiclePosition.isValid) {
-            this._map.panTo(leaflet.latLng(this._vehiclePosition.latitude, this._vehiclePosition.longitude));
+        try {
+            if (this._vehiclePosition.isValid) {
+                this._map.panTo(leaflet.latLng(this._vehiclePosition.latitude, this._vehiclePosition.longitude));
+            }
+        }
+        catch (err) {
+            console.log(err);
+            this.showError(err);
         }
     }
+
+    // private panToFlightplan(): void {
+    //     console.log('pan!');
+    //     try {
+            
+    //     }
+    //     catch (err) {
+    //         console.log(err);
+    //         this.showError(err);
+    //     }
+    // }
 
     private drawFlightplan(flightplan: Flightplan, map: leaflet.Map): void {
 
