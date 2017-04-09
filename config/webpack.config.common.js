@@ -286,6 +286,11 @@ module.exports = function (options) {
         {
           from: 'node_modules/leaflet/dist/leaflet.css',
           to: 'assets/leaflet/leaflet.css'
+        },
+        // Scripts
+        {
+          from: 'src/scripts/start.bat',
+          to: 'start.bat'
         }
       ]),
 

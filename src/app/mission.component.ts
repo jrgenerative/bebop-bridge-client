@@ -115,6 +115,7 @@ export class MissionComponent implements OnInit {
     // Add flight plan functionality ====================================
 
     addFlightplanFile(inputElement: HTMLInputElement): void {
+        console.log('adding flightplan file...');
         // (don't need to use inputElement)
         this.readFlightplanFile(this.flightplanFileDialogElement.nativeElement).subscribe(
             (flightplan: Flightplan) => {
