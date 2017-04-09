@@ -12,6 +12,7 @@ COPY package.json /usr/src/app
 
 # Install dependecies
 RUN npm install --production
+RUN npm install bebop-bridge-shared
 
 # Get all the code needed to run the app
 COPY dist/ /usr/src/app/dist
